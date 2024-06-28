@@ -1,4 +1,4 @@
-package main
+package mintui
 
 import (
 	"strconv"
@@ -80,10 +80,10 @@ func Color256B(color uint8) {
 	Color(48, 5, ColorMode(color))
 }
 
-func ColorTrueB(r uint32, g uint32, b uint32) {
+func ColorTrueF(r uint32, g uint32, b uint32) {
 	Color(38, 2, ColorMode(r), ColorMode(g), ColorMode(b))
 }
 
-func ColorTrueF(r uint32, g uint32, b uint32) {
+func ColorTrueB(r uint32, g uint32, b uint32) {
 	Color(48, 2, ColorMode(r), ColorMode(g), ColorMode(b))
 }

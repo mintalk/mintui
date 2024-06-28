@@ -1,4 +1,4 @@
-package main
+package mintui
 
 import "fmt"
 
@@ -25,9 +25,10 @@ const (
 type PrivateMode uint
 
 const (
-	CURSOR_VISIBLE PrivateMode = 25
-	SCREEN_SAVE    PrivateMode = 47
-	ALT_BUFFER                 = 1049
+	SMOOTH_SCROLL  PrivateMode = 4
+	SHOW_TOOLBAR   PrivateMode = 10
+	SHOW_CURSOR    PrivateMode = 25
+	SHOW_SCROLLBAR PrivateMode = 30
 )
 
 func ScreenModeEnable(mode ScreenMode) {
@@ -44,4 +45,8 @@ func PrivateModeEnable(mode PrivateMode) {
 
 func PrivateModeDisable(mode PrivateMode) {
 	PutEsc(fmt.Sprintf("[?%dl", int(mode)))
+}
+
+func PrivateModeReset(mode PrivateMode) {
+	PutEsc(fmt.Sprintf("[?%dr", int(mode)))
 }

@@ -1,4 +1,4 @@
-package main
+package mintui
 
 // #include <termios.h>
 // #include <unistd.h>

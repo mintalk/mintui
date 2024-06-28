@@ -1,4 +1,4 @@
-package main
+package mintui
 
 func EraseDisplay() {
 	PutEsc("[J")

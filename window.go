@@ -1,10 +1,14 @@
-package main
+package mintui
 
 type Window struct {
 	line   uint
 	column uint
 	width  uint
 	height uint
+}
+
+func NewWindow(line, column, width, height uint) Window {
+	return Window{line, column, width, height}
 }
 
 func (window *Window) CursorMove(line, column uint) {
@@ -17,25 +21,33 @@ func (window *Window) Print(s string) {
 	}
 }
 
-func (window *Window) Border() {
+func (window *Window) Border(t, b, l, r, tl, tr, bl, br int) {
 	for i := uint(1); i < window.width-1; i++ {
 		window.CursorMove(0, i)
-		PutChar('─')
+		PutChar(t)
 		window.CursorMove(window.height-1, i)
-		PutChar('─')
+		PutChar(b)
 	}
 	for i := uint(1); i < window.height-1; i++ {
 		window.CursorMove(i, 0)
-		PutChar('│')
+		PutChar(l)
 		window.CursorMove(i, window.width-1)
-		PutChar('│')
+		PutChar(r)
 	}
 	window.CursorMove(0, 0)
-	PutChar('┌')
+	PutChar(tl)
 	window.CursorMove(0, window.width-1)
-	PutChar('┐')
+	PutChar(tr)
 	window.CursorMove(window.height-1, 0)
-	PutChar('└')
+	PutChar(bl)
 	window.CursorMove(window.height-1, window.width-1)
-	PutChar('┘')
+	PutChar(br)
+}
+
+func (window *Window) BorderThin() {
+	window.Border('─', '─', '│', '│', '┌', '┐', '└', '┘')
+}
+
+func (window *Window) BorderThick() {
+	window.Border('━', '━', '┃', '┃', '┏', '┓', '┗', '┛')
 }
