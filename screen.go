@@ -28,7 +28,7 @@ func (screen *Screen) Clean() {
 }
 
 func (screen *Screen) SetLocale(category LocaleCategory, locale string) {
-	C.setlocale(C.LC_ALL, C.CString(locale))
+	C.setlocale(C.int(category), C.CString(locale))
 }
 
 func (screen *Screen) SetIFlag(flag iflag, state bool) {
@@ -64,5 +64,10 @@ func (screen *Screen) SetLFlag(flag lflag, state bool) {
 	} else {
 		screen.newt.c_lflag &= ^C.uint(flag)
 	}
+	C.tcsetattr(C.STDIN_FILENO, C.TCSANOW, &screen.newt)
+}
+
+func (screen *Screen) SetCC(char cc, value uint) {
+	screen.newt.c_cc[char] = C.cc_t(value)
 	C.tcsetattr(C.STDIN_FILENO, C.TCSANOW, &screen.newt)
 }

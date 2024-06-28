@@ -7,8 +7,8 @@ func CursorHome() {
 }
 
 func CursorMove(line, column uint) {
-	PutEsc(fmt.Sprintf("[%d;%dH", line, column))
-	PutEsc(fmt.Sprintf("[%d;%df", line, column))
+	PutEsc(fmt.Sprintf("[%d;%dH", line+1, column+1))
+	PutEsc(fmt.Sprintf("[%d;%df", line+1, column+1))
 }
 
 func CursorUp(lines uint) {
