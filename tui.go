@@ -40,9 +40,16 @@ func PutChar(char int) {
 	C.putwchar(C.wchar_t(char))
 }
 
+func Print(s string) {
+	for i := 0; i < len(s); i++ {
+		PutChar(int(s[i]))
+	}
+}
+
 func PutEsc(s string) {
 	PutChar(27) // ESC
 	for i := 0; i < len(s); i++ {
 		PutChar(int(s[i]))
 	}
+	C.fflush(C.stdout)
 }

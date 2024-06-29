@@ -19,15 +19,13 @@ func main() {
 	mt.Color256F(40)
 	mt.ColorTrueB(100, 0, 255)
 
-	window := mt.NewWindow(0, 0, 20, 10)
-	window.CursorMove(1, 1)
-	window.Print("Hello! E to exit")
+	mt.CursorHome()
+	mt.Print("Hello! E to exit")
 
 	var c int
 	for c != 'e' {
-		window.BorderThick()
-		window.CursorMove(2, 1)
-		window.Print(strconv.Itoa(c) + ";")
+		mt.CursorMove(1, 1)
+		mt.Print(strconv.Itoa(c) + ";")
 		//PutChar(c)
 		if mt.HasChar() {
 			c = mt.GetChar()

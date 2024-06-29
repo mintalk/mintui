@@ -6,23 +6,29 @@ func CursorHome() {
 	PutEsc("[H")
 }
 
-func CursorMove(line, column uint) {
-	PutEsc(fmt.Sprintf("[%d;%dH", line+1, column+1))
-	PutEsc(fmt.Sprintf("[%d;%df", line+1, column+1))
+func CursorMove(x, y uint) {
+	PutEsc(fmt.Sprintf("[%d;%dH", y+1, x+1))
+	PutEsc(fmt.Sprintf("[%d;%df", y+1, x+1))
 }
 
-func CursorUp(lines uint) {
-	PutEsc(fmt.Sprintf("[%dA", lines))
+func CursorUp(dy uint) {
+	PutEsc(fmt.Sprintf("[%dA", dy))
 }
 
-func CursorDown(lines uint) {
-	PutEsc(fmt.Sprintf("[%dB", lines))
+func CursorDown(dy uint) {
+	PutEsc(fmt.Sprintf("[%dB", dy))
 }
 
-func CursorLeft(columns uint) {
-	PutEsc(fmt.Sprintf("[%dC", columns))
+func CursorLeft(dx uint) {
+	PutEsc(fmt.Sprintf("[%dC", dx))
 }
 
-func CursorRight(columns uint) {
-	PutEsc(fmt.Sprintf("[%dD", columns))
+func CursorRight(dx uint) {
+	PutEsc(fmt.Sprintf("[%dD", dx))
+}
+
+func CursorPos() (x, y uint) {
+	PutEsc("[6n")
+	fmt.Scanf("\033[%d;%dR", &y, &x)
+	return x - 1, y - 1
 }
